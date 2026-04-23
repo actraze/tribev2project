@@ -135,8 +135,35 @@ class EngagementMLP(nn.Module):
 - Trains on CPU (MLP is ~500K params, takes seconds)
 - Save best model to `models/best_model.pt`
 
-#### Step 5: Inference (`predict.py`)
+#### Step 5: Inference + Multimodal LLM Explanation (`predict.py`)
 Takes a new reel URL → downloads → runs through Modal → loads trained model → outputs predicted engagement rate + brain region breakdown.
+
+**Two-stage output:**
+1. **MLP score**: The trained model outputs a predicted engagement rate (e.g. 7.3%)
+2. **Multimodal LLM explanation**: Extract keyframes from the video (1 per 2s via ffmpeg), then send the keyframe images + transcript + per-window brain region stats to a multimodal LLM (Claude API with vision) that can SEE the actual frames. The LLM explains WHY the score is what it is — grounded in what's visually happening at each moment, not hallucinated.
+
+The LLM prompt should include:
+- The MLP's predicted engagement score
+- Keyframe images for each 2s window
+- Per-window brain region activations (which regions fired and how strongly)
+- Transcript words aligned to each window
+- Instructions to explain the score by referencing what's actually visible in each frame + which brain regions responded
+
+This gives a final output like:
+```
+Predicted Engagement: 7.3%
+
+0-2s: [sees frame] Opening hook — close-up face with direct eye contact.
+      Brain: prefrontal HIGH, STS HIGH → social cognition + attention locked in.
+4-6s: [sees frame] Generic b-roll of a street.
+      Brain: visual cortex drops, prefrontal LOW → attention wandering.
+...
+Top 3 recommendations (grounded in frames + brain data):
+1. Replace the b-roll at 4-6s — brain disengages here. Use a face or text overlay.
+...
+```
+
+Requires: `ANTHROPIC_API_KEY` env var for Claude API (vision-capable model).
 
 ### File Structure (target)
 ```
@@ -178,7 +205,8 @@ python predict.py <NEW_REEL_URL>   # demo inference
 
 ### Environment Variables Needed
 ```bash
-export MOONSHOT_API_KEY="..."    # Optional, only if using LLM analysis
+export ANTHROPIC_API_KEY="..."   # Required for multimodal LLM explanation in predict.py
+export MOONSHOT_API_KEY="..."    # Optional, only if using old Phase 1 LLM analysis
 # Modal and HuggingFace tokens are configured via their respective CLIs
 ```
 
