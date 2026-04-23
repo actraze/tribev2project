@@ -1,0 +1,10 @@
+reels/
+outputs/
+.venv/
+data/
+models/
+tribev2/
+__pycache__/
+*.pyc
+.modal.toml
+node_modules/
