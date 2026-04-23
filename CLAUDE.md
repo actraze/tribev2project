@@ -140,30 +140,37 @@ Takes a new reel URL → downloads → runs through Modal → loads trained mode
 
 **Two-stage output:**
 1. **MLP score**: The trained model outputs a predicted engagement rate (e.g. 7.3%)
-2. **Multimodal LLM explanation**: Extract keyframes from the video (1 per 2s via ffmpeg), then send the keyframe images + transcript + per-window brain region stats to a multimodal LLM (Claude API with vision) that can SEE the actual frames. The LLM explains WHY the score is what it is — grounded in what's visually happening at each moment, not hallucinated.
+2. **Moonshot Kimi K2.6 explanation**: Send the full brain data + transcript + MLP score to Kimi for a detailed natural language breakdown. The LLM receives ALL of the following:
+   - Per-window brain region activations (all 7 regions with activation levels per 2s window)
+   - Per-window stats (mean/max/min activation, fire vertices, dominant region)
+   - Overall brain trends (rising/falling, peak timestamp, region breakdown)
+   - Full transcript with word-level timestamps aligned to brain windows
+   - The MLP's predicted engagement score
+   - Keyframe images extracted from the video (1 per 2s via ffmpeg) — so the LLM can SEE what's on screen
 
-The LLM prompt should include:
-- The MLP's predicted engagement score
-- Keyframe images for each 2s window
-- Per-window brain region activations (which regions fired and how strongly)
-- Transcript words aligned to each window
-- Instructions to explain the score by referencing what's actually visible in each frame + which brain regions responded
+The LLM explains WHY the engagement score is what it is by cross-referencing what's visually happening in each frame with which brain regions responded and what was being said.
 
-This gives a final output like:
+Output example:
 ```
-Predicted Engagement: 7.3%
+MLP Predicted Engagement: 7.3%
 
-0-2s: [sees frame] Opening hook — close-up face with direct eye contact.
-      Brain: prefrontal HIGH, STS HIGH → social cognition + attention locked in.
-4-6s: [sees frame] Generic b-roll of a street.
-      Brain: visual cortex drops, prefrontal LOW → attention wandering.
+Second-by-second breakdown:
+0-2s: Opening hook — close-up face with direct eye contact. Transcript: "Hey guys"
+      Brain: prefrontal HIGH (0.72), STS HIGH (0.68) → social cognition + attention locked in
+4-6s: B-roll of a street. No speech.
+      Brain: visual cortex drops (0.31), prefrontal LOW (0.22) → attention wandering
+8-10s: Voiceover delivers key insight. Transcript: "here's what nobody tells you"
+      Brain: Broca's HIGH (0.65), auditory HIGH (0.58) → language processing peaks
 ...
-Top 3 recommendations (grounded in frames + brain data):
-1. Replace the b-roll at 4-6s — brain disengages here. Use a face or text overlay.
-...
+Strongest moments: 0-2s (social hook), 8-10s (language hook)
+Weakest moments: 4-6s (generic visuals)
+
+Recommendations:
+1. Replace b-roll at 4-6s — brain disengages. Use face or text overlay instead.
+2. ...
 ```
 
-Requires: `ANTHROPIC_API_KEY` env var for Claude API (vision-capable model).
+Requires: `MOONSHOT_API_KEY` env var for Kimi K2.6 API.
 
 ### File Structure (target)
 ```
@@ -205,13 +212,12 @@ python predict.py <NEW_REEL_URL>   # demo inference
 
 ### Environment Variables Needed
 ```bash
-export ANTHROPIC_API_KEY="..."   # Required for multimodal LLM explanation in predict.py
-export MOONSHOT_API_KEY="..."    # Optional, only if using old Phase 1 LLM analysis
+export MOONSHOT_API_KEY="..."    # Required for Kimi K2.6 LLM explanation in predict.py
 # Modal and HuggingFace tokens are configured via their respective CLIs
 ```
 
 ## Do Not
 - Do not trim videos to 10 seconds — process full length
-- Do not use the Kimi/Moonshot LLM for engagement scoring — that's what the MLP replaces
+- Do not use the LLM for engagement scoring — the MLP does that. The LLM's job is to EXPLAIN the score using brain data + frames + transcript
 - Do not install torch on the VPS globally — only in .venv (the heavy GPU work runs on Modal)
 - Do not store large files in git — add `reels/`, `outputs/`, `.venv/`, `data/`, `models/`, `tribev2/` to .gitignore
