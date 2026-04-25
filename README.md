@@ -103,11 +103,11 @@ Browser                         Hetzner VPS (Docker)              Supabase
 
 ## Architecture
 
-![Architecture diagram](./assets/architecture.svg)
+![Architecture diagram](./architecture.svg)
 
 ## User Flow
 
-![User flow diagram](./assets/userflow.svg)
+![User flow diagram](./userflow.svg)
 
 ### Stack
 
