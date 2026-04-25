@@ -103,7 +103,6 @@ Browser                         Hetzner VPS (Docker)              Supabase
       ◄── Kimi K2.6 stream           ├── Streaming LLM chat ──────►  INSERT chat_messages
 ```
 
-## Architecture
 
 ![Architecture diagram](./architecture.svg)
 
@@ -123,80 +122,6 @@ Browser                         Hetzner VPS (Docker)              Supabase
 | LLM | Kimi K2.6 via API (128K context, multimodal) |
 | Database | Supabase (Postgres) |
 | Hosting | Hetzner VPS via Docker |
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+
-- Python 3.11+
-- Docker + Docker Compose
-- [Supabase](https://supabase.com) project
-- Moonshot API key (Kimi K2.6)
-
-### Environment Variables
-
-Create a `.env.local` file at the project root:
-
-```env
-MOONSHOT_API_KEY=your_moonshot_key
-MODAL_TOKEN_ID=your_modal_token_id
-MODAL_TOKEN_SECRET=your_modal_token_secret
-HF_TOKEN=your_huggingface_token
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-```
-
-### Local Development
-
-```bash
-# Install dependencies
-npm install
-
-# Set up Python environment
-python3.11 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-# Run development server
-npm run dev
-```
-
-### Docker Deployment (Hetzner VPS)
-
-```bash
-# Build and start
-docker-compose up --build -d
-
-# Update from GitHub
-git pull && docker-compose up --build -d
-```
-
----
-
-## Database Schema
-
-**`analyses`** — one row per uploaded video
-
-| Column | Type | Description |
-|--------|------|-------------|
-| `id` | `uuid` | Primary key, used in all URLs |
-| `status` | `text` | `processing` · `completed` · `failed` |
-| `features` | `jsonb` | Brain activation data per 2s window |
-| `transcript` | `jsonb` | Word-level timestamps |
-| `diagnosis` | `text` | Full LLM neural breakdown |
-| `brief` | `text` | Creator-facing executive summary |
-
-**`chat_messages`** — conversation history per analysis
-
-| Column | Type | Description |
-|--------|------|-------------|
-| `analysis_id` | `uuid` | FK → analyses |
-| `role` | `text` | `user` or `assistant` |
-| `content` | `text` | Message body |
 
 ---
 
@@ -259,7 +184,6 @@ This project was built for the Palestine Techno Park 2026 hackathon.
 
 ## License
 
-[MIT](LICENSE) © 2026 Zaid
 
 ---
 
