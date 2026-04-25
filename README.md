@@ -52,7 +52,9 @@
 
 ## What is Grey Matter?
 
-Gray Matter is a web application that runs your video through **Meta's TRIBE v2 brain encoder** — a simulated fMRI model that runs on GPU — and produces a second-by-second breakdown of how the human brain responds to your content.
+Gray Matter predicts virality of content by analyzing your Brain
+
+A web application that runs your video through **Meta's TRIBE v2 brain encoder** — a simulated fMRI model that runs on GPU — and produces a second-by-second breakdown of how the human brain responds to your content.
 
 An LLM cross-references the brain activation data with video keyframes and a word-level transcript to diagnose what's working, what's losing attention, and exactly when. You then get a streaming AI chat interface to explore the results.
 
