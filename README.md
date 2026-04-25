@@ -101,6 +101,14 @@ Browser                         Hetzner VPS (Docker)              Supabase
       ◄── Kimi K2.6 stream           ├── Streaming LLM chat ──────►  INSERT chat_messages
 ```
 
+## Architecture
+
+![Architecture diagram](./assets/architecture.svg)
+
+## User Flow
+
+![User flow diagram](./assets/userflow.svg)
+
 ### Stack
 
 | Layer | Technology |
