@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --background: #050505;
+  --panel: #121212;
+  --panel-high: #201f1f;
+  --cyan: #00f2ff;
+  --purple: #9d05ff;
+  --muted: #b9cacb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(0, 242, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(157, 5, 255, 0.13), transparent 30%),
+    linear-gradient(180deg, #050505 0%, #090909 48%, #050505 100%);
+  color: #e5e2e1;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(0, 242, 255, 0.28);
+  color: white;
+}
+
+.scanline {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 242, 255, 0.045) 3px,
+    rgba(0, 242, 255, 0.045) 4px
+  );
+}
+
+.panel {
+  background: rgba(18, 18, 18, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 242, 255, 0.66), transparent);
+  pointer-events: none;
+}
+
+.cyber-button {
+  border: 1px solid rgba(0, 242, 255, 0.58);
+  background: rgba(0, 242, 255, 0.11);
+  color: #e1fdff;
+  box-shadow: 0 0 18px rgba(0, 242, 255, 0.18);
+}
+
+.cyber-button:hover {
+  background: rgba(0, 242, 255, 0.2);
+  box-shadow: 0 0 24px rgba(0, 242, 255, 0.32);
+}
+
+.filled-cyber-button {
+  background: #00f2ff;
+  color: #002022;
+  box-shadow: 0 0 24px rgba(0, 242, 255, 0.32);
+}
+
+.filled-cyber-button:hover {
+  box-shadow: 0 0 34px rgba(0, 242, 255, 0.48);
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(0, 242, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.42);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.62;
+  }
+  70% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(520%);
+    opacity: 0;
+  }
+}
+
+.sweep-line {
+  animation: sweep 3.8s ease-in-out infinite;
+}

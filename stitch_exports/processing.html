@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Processing - TRIBE v2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#f1daff",
+                      "inverse-surface": "#e5e2e1",
+                      "on-surface": "#e5e2e1",
+                      "on-tertiary-fixed": "#3a0033",
+                      "inverse-on-surface": "#313030",
+                      "primary-fixed": "#74f5ff",
+                      "on-error": "#690005",
+                      "surface-container-highest": "#353534",
+                      "surface-tint": "#00dbe7",
+                      "surface-variant": "#353534",
+                      "surface-container": "#201f1f",
+                      "tertiary-container": "#ffccee",
+                      "on-surface-variant": "#b9cacb",
+                      "outline": "#849495",
+                      "on-primary": "#00363a",
+                      "secondary": "#dfb7ff",
+                      "tertiary-fixed-dim": "#fface8",
+                      "on-secondary-fixed-variant": "#6b00b0",
+                      "primary-fixed-dim": "#00dbe7",
+                      "surface-bright": "#3a3939",
+                      "on-secondary-container": "#f7e6ff",
+                      "tertiary-fixed": "#ffd7f0",
+                      "on-secondary-fixed": "#2d004f",
+                      "on-tertiary-container": "#af009d",
+                      "on-tertiary-fixed-variant": "#840076",
+                      "surface-dim": "#131313",
+                      "outline-variant": "#3a494b",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#004f54",
+                      "background": "#131313",
+                      "on-background": "#e5e2e1",
+                      "on-secondary": "#4b007e",
+                      "on-tertiary": "#5e0053",
+                      "inverse-primary": "#00696f",
+                      "error": "#ffb4ab",
+                      "primary-container": "#00f2ff",
+                      "primary": "#e1fdff",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-low": "#1c1b1b",
+                      "tertiary": "#fff5f8",
+                      "on-primary-fixed": "#002022",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#dfb7ff",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface": "#131313",
+                      "on-primary-container": "#006a71",
+                      "secondary-container": "#9d05ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "margin": "32px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "xl": "48px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "label-sm": [
+                              "Space Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-xl": [
+                              "Space Grotesk"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md relative overflow-x-hidden">
+<!-- Neural Network Background Pattern -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-20" style="background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.1) 0%, transparent 60%);">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdib3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNHYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMC0zMFYwaC0ydjRoLTR2Mmg0djRoMnYtNGg0VjJoLTR6bS0xOCAyMHYtNGgtMnY0SC41djJoMTUuNXY0aDJ2LTRoMTV2LTJoLTE1em0xOCAyMHYtNGgtMnY0SC41djJoMTUuNXY0aDJ2LTRoMTV2LTJoLTE1eiIgZmlsbD0iIzMzMyIgZmlsbC1vcGFjaXR5PSIwLjUiLz48L2c+PC9zdmc+')] opacity-20"></div>
+</div>
+<!-- TopAppBar -->
+<header class="bg-zinc-950/70 backdrop-blur-xl font-['Space_Grotesk'] tracking-tight text-sm uppercase docked full-width top-0 z-50 border-b border-white/10 flex justify-between items-center px-8 h-16 w-full fixed">
+<div class="flex items-center gap-8">
+<div class="text-2xl font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_10px_rgba(0,242,255,0.5)]">
+                TRIBE v2
+            </div>
+<nav class="hidden md:flex gap-6">
+<a class="text-zinc-500 transition-colors duration-300 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)] py-5" href="#">Solutions</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 py-5 opacity-80 scale-95" href="#">Neural Analysis</a> <!-- Assuming Neural Analysis is active contextually -->
+<a class="text-zinc-500 transition-colors duration-300 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)] py-5" href="#">Docs</a>
+<a class="text-zinc-500 transition-colors duration-300 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,242,255,0.4)] py-5" href="#">Pricing</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 font-data-mono text-data-mono hover:drop-shadow-[0_0_12px_rgba(0,242,255,0.6)] transition-all">Launch App</button>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-20 px-margin max-w-[1920px] mx-auto w-full z-10 relative grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Status & Timeline -->
+<div class="col-span-1 lg:col-span-4 flex flex-col gap-xl">
+<!-- Status Header -->
+<div class="bg-[#121212] backdrop-blur-xl border-t border-white/5 p-lg shadow-[0_4px_24px_rgba(0,0,0,0.5)] relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-primary-container/50 to-transparent"></div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Processing Pipeline</h1>
+<p class="font-data-mono text-data-mono text-primary-container animate-pulse">Encoding neural activity... approximately 14 minutes remaining.</p>
+</div>
+<!-- Progress Tracker -->
+<div class="bg-[#121212] backdrop-blur-xl border-t border-white/5 p-lg shadow-[0_4px_24px_rgba(0,0,0,0.5)] relative">
+<div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-primary-container/20 to-transparent"></div>
+<div class="relative pl-6 space-y-8 before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary-container before:via-surface-variant before:to-surface-variant">
+<!-- Step 1: Done -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(0,242,255,0.4)] shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container border border-primary-container/30">
+<h3 class="font-data-mono text-data-mono text-primary-fixed-dim">Uploading video</h3>
+<span class="font-label-sm text-label-sm text-outline mt-1 block">Completed</span>
+</div>
+</div>
+<!-- Step 2: In Progress -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container border-2 border-primary-container shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 animate-pulse shadow-[0_0_8px_rgba(0,242,255,0.8)]">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container border border-primary-container shadow-[0_0_15px_rgba(0,242,255,0.15)]">
+<h3 class="font-data-mono text-data-mono text-primary-container">Brain encoding (GPU)</h3>
+<span class="font-label-sm text-label-sm text-primary-fixed mt-1 block">Processing...</span>
+</div>
+</div>
+<!-- Step 3: Waiting -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container-low border border-surface-variant text-on-surface-variant opacity-60">
+<h3 class="font-data-mono text-data-mono">Pulling results</h3>
+<span class="font-label-sm text-label-sm mt-1 block">Waiting</span>
+</div>
+</div>
+<!-- Step 4: Waiting -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container-low border border-surface-variant text-on-surface-variant opacity-60">
+<h3 class="font-data-mono text-data-mono">Extracting features &amp; frames</h3>
+<span class="font-label-sm text-label-sm mt-1 block">Waiting</span>
+</div>
+</div>
+<!-- Step 5: Waiting -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container-low border border-surface-variant text-on-surface-variant opacity-60">
+<h3 class="font-data-mono text-data-mono">Running neural diagnosis (LLM)</h3>
+<span class="font-label-sm text-label-sm mt-1 block">Waiting</span>
+</div>
+</div>
+<!-- Step 6: Waiting -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded bg-surface-container-low border border-surface-variant text-on-surface-variant opacity-60">
+<h3 class="font-data-mono text-data-mono">Generating summary</h3>
+<span class="font-label-sm text-label-sm mt-1 block">Waiting</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: 3D Visualization Placeholder -->
+<div class="col-span-1 lg:col-span-8 bg-[#0a0a0a]/80 backdrop-blur-2xl border border-white/5 relative flex items-center justify-center min-h-[500px] overflow-hidden shadow-inner">
+<!-- Scanning Line -->
+<div class="absolute top-0 left-0 w-full h-[2px] bg-primary-container/80 shadow-[0_0_15px_rgba(0,242,255,0.8)] animate-[scan_3s_ease-in-out_infinite] z-20"></div>
+<!-- 3D Mesh Placeholder (Stylized Image) -->
+<div class="relative w-3/4 max-w-lg aspect-square">
+<img alt="Stylized glowing 3D wireframe brain mesh representing neural network processing against dark background" class="w-full h-full object-cover mix-blend-screen opacity-80 hue-rotate-[180deg] saturate-200" data-alt="Stylized glowing 3D wireframe brain mesh representing neural network processing against dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPAqKm31RycRAdjdv-liMMfBK-GP7c9WEEGS6HXtOa22NZD8N2nPmhXVRPJSErGo4FYAudbz_sqYOuDDM1ZNGkEQXwSvSbRWiXF8aEmqXkjvhXi88y2SjaLSps5ch_4X5yVctzKxE9p2rHcSXp5DDeZnHZ-IPoXV9E5iwAJjYkMzgQxpR66zeriFobUdddk0mmjEgw0n4u33SunSbouos1hbmIf7F-RhR7L1cu9Zi3BOkQOBrClw_85-jAF-jUjUxYVvl73XNwaZKu"/>
+<!-- Glowing Overlays -->
+<div class="absolute inset-0 bg-radial-gradient from-primary-container/20 to-transparent mix-blend-overlay"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/30 blur-[50px] rounded-full animate-pulse"></div>
+</div>
+<!-- Diagnostics Overlay -->
+<div class="absolute bottom-4 left-4 font-data-mono text-label-sm text-primary-container opacity-70 flex flex-col gap-1">
+<span>GPU_TEMP: 68°C</span>
+<span>VRAM_ALLOC: 14.2GB</span>
+<span>TENSORS: 1.4B</span>
+</div>
+<div class="absolute top-4 right-4 font-data-mono text-label-sm text-primary-container opacity-70">
+<span>MODEL: NEUROCORE_V2.1</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-950 font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] w-full border-t border-white/5 flex justify-between items-center px-12 py-8 w-full max-w-[1920px] mx-auto z-50 relative">
+<div class="text-zinc-600 hover:text-zinc-100 transition-colors">
+            © 2024 TRIBE NEUROSCIENCE. ANALYTICAL VELOCITY SECURED.
+        </div>
+<div class="flex gap-6">
+<a class="text-zinc-600 hover:text-zinc-100 transition-colors" href="#">Privacy Protocol</a>
+<a class="text-zinc-600 hover:text-zinc-100 transition-colors" href="#">API Terminal</a>
+<a class="text-zinc-600 hover:text-zinc-100 transition-colors" href="#">Support</a>
+<a class="text-zinc-600 hover:text-zinc-100 transition-colors" href="#">Lab Status</a>
+</div>
+</footer>
+<style>
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .bg-radial-gradient {
+            background-image: radial-gradient(var(--tw-gradient-stops));
+        }
+    </style>
+</body></html>

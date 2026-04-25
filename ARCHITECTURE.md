@@ -38,7 +38,7 @@ Instagram Reel URL
         │
    ┌────▼──────────────┐
    │ 5. LLM #2         │  Text-only, multi-turn conversation
-   │    (Conversational)│  Receives: diagnosis.txt as system context
+   │  (Conversational) │  Receives: diagnosis.txt as system context
    │                   │  User can ask follow-up questions:
    │                   │    "Why does attention drop at second 8?"
    │                   │    "What should I change in the hook?"

@@ -74,7 +74,7 @@ The LLM outputs a second-by-second breakdown explaining WHY each moment works or
 
 ```
 tribev2project/
-├── CLAUDE.md                    # This file
+├── AGENTS.md                    # This file
 ├── ARCHITECTURE.md              # Pipeline diagram and design rationale
 ├── PROGRESS.md                  # History of completed work
 ├── download_reel.mjs            # Download reel via yt-dlp

@@ -39,7 +39,7 @@ image = (
 @app.function(
     image=image,
     gpu="A10G",
-    timeout=1800,
+    timeout=3600,
     secrets=[modal.Secret.from_name("huggingface")],
     volumes={"/outputs": volume},
 )
@@ -122,22 +122,56 @@ def run_tribev2(video_bytes: bytes, code: str):
 
 
 @app.local_entrypoint()
-def main(reel: str):
-    """Local entrypoint: reads the video file and dispatches to GPU."""
+def main(reel: str, batch: str = ""):
+    """Local entrypoint: process one reel or a batch of reels concurrently.
+
+    Single reel:  modal run modal_tribev2.py --reel reels/CODE.mp4
+    Batch:        modal run modal_tribev2.py --reel dummy --batch "reels/A.mp4,reels/B.mp4,..."
+    """
     from pathlib import Path
 
-    video_path = Path(reel)
-    if not video_path.exists():
-        raise FileNotFoundError(f"Video not found: {video_path}")
+    if batch:
+        # Batch mode: process multiple reels concurrently via .map()
+        reel_paths = [p.strip() for p in batch.split(",") if p.strip()]
+        inputs = []
+        for rp in reel_paths:
+            video_path = Path(rp)
+            if not video_path.exists():
+                print(f"WARNING: Video not found, skipping: {video_path}")
+                continue
+            code = video_path.stem.replace("-10s", "")
+            video_bytes = video_path.read_bytes()
+            print(f"Uploading {video_path.name} ({len(video_bytes) / 1e6:.1f} MB)")
+            inputs.append((video_bytes, code))
 
-    code = video_path.stem.replace("-10s", "")
-    video_bytes = video_path.read_bytes()
-    print(f"Uploading {video_path.name} ({len(video_bytes) / 1e6:.1f} MB) to Modal...")
+        if not inputs:
+            print("No valid videos to process.")
+            return
 
-    result = run_tribev2.remote(video_bytes, code)
-    print(f"\nDone! Results:")
-    print(f"  Brain tensor shape: {result['preds_shape']}")
-    print(f"  Transcript words: {result['n_words']}")
-    print(f"  Segments: {result['n_segments']}")
-    print(f"\nPull results with:")
-    print(f"  modal volume get tribev2-outputs {code} ./outputs/{code}")
+        print(f"\nDispatching {len(inputs)} reels to Modal ({len(inputs)} containers)...")
+        bytes_list, codes_list = zip(*inputs)
+        for result in run_tribev2.map(bytes_list, codes_list):
+            print(f"  Done: {result['code']} — brain {result['preds_shape']}, "
+                  f"{result['n_words']} words, {result['n_segments']} segments")
+
+        print(f"\nAll {len(inputs)} reels complete.")
+        print(f"Pull results with:")
+        for _, code in inputs:
+            print(f"  modal volume get tribev2-outputs {code} ./outputs/{code}")
+    else:
+        # Single reel mode (original behavior)
+        video_path = Path(reel)
+        if not video_path.exists():
+            raise FileNotFoundError(f"Video not found: {video_path}")
+
+        code = video_path.stem.replace("-10s", "")
+        video_bytes = video_path.read_bytes()
+        print(f"Uploading {video_path.name} ({len(video_bytes) / 1e6:.1f} MB) to Modal...")
+
+        result = run_tribev2.remote(video_bytes, code)
+        print(f"\nDone! Results:")
+        print(f"  Brain tensor shape: {result['preds_shape']}")
+        print(f"  Transcript words: {result['n_words']}")
+        print(f"  Segments: {result['n_segments']}")
+        print(f"\nPull results with:")
+        print(f"  modal volume get tribev2-outputs {code} ./outputs/{code}")
