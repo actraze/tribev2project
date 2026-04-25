@@ -251,7 +251,7 @@ tribev2project/
 
 ## Contributing
 
-This project was built for a hackathon. PRs are welcome — open an issue first to discuss what you'd like to change.
+This project was built for the Palestine Techno Park 2026 hackathon.
 
 ---
 
