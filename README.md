@@ -1,7 +1,9 @@
 <div align="center">
 
-<!-- TRIBE v2 Logo -->
-<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<div align="center">
+<img src="./logo.png" alt="Grey Matter Logo" width="220"/>
+
+  <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#0f172a"/>
