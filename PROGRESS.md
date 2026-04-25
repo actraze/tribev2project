@@ -332,7 +332,7 @@ python3 chat.py XXXX
 
 ## Environment Variables
 
-MOONSHOT_API_KEY=sk-NBNDjfGisnf5MdS7o7ZVfSAd5gkvvewifN0h3b7bVorXjY1z    # Required for Kimi K2.6 (LLM #1 + #2)
+MOONSHOT_API_KEY=...    # Required for Kimi K2.6 (LLM #1 + #2)
 ```
 
 
