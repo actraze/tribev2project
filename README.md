@@ -1,8 +1,8 @@
 <div align="center">
 
 <div align="center">
-<img src="./logo.png" alt="Grey Matter Logo" width="220"/>
-
+<img src="./logo.png" alt="Grey Matter Logo" width="400"/>
+  
   <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
