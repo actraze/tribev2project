@@ -53,6 +53,8 @@
 
 Introducing Grey Matter. Winner of 3rd place in the AI Hackathon at Technopark Birzeit held as part of Palestine AI Week 2026.
 
+---
+
 ## What is Grey Matter?
 
 Gray Matter predicts virality of content by analyzing your Brain
