@@ -49,6 +49,8 @@
   <circle cx="60" cy="30" r="2.5" fill="#06b6d4" filter="url(#glow)"/>
 </svg>
 
+---
+
 Introducing Grey Matter. Winner of 3rd place in the AI Hackathon at Technopark Birzeit held as part of Palestine AI Week 2026.
 
 ## What is Grey Matter?
